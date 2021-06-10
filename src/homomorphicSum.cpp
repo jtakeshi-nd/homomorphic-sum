@@ -45,12 +45,10 @@ int main(int argc, char* argv[]){
             std::vector<double> dat = {static_cast<double>(rand())/(static_cast<double>(RAND_MAX/1000))};
             (*ptext)[i] = pc.context->MakeCKKSPackedPlaintext(rawData);
         }
-        std::cout << "plaintexts" << std::endl;
         std::vector<ctext_typ> *sum = new std::vector<ctext_typ>(200000); 
         for(int i=0; i<200000; i++){
             (*sum)[i] = pc.context->Encrypt(pc.pk,(*ptext)[i]);
         }
-        std::cout << "ciphertexts" << std::endl;
 
         delete ptext;
 
@@ -59,11 +57,8 @@ int main(int argc, char* argv[]){
             pc.context->EvalAddInPlace(ctext,c);
         }
         clk::time_point end = clk::now();
-
-        std::cout << "sum " << std::endl;
         delete sum;
-        std::cout << d.count() << std::endl;
-        duration += d.count();
+        duration += std::chrono::duration_cast<std::chrono::microseconds>(end-beginning).count();
     }
 
 
