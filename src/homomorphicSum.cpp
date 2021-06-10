@@ -39,7 +39,7 @@ int main(int argc, char* argv[]){
     ctext_typ ctext = pc.context->Encrypt(pc.pk,p);
     size_t duration = 0;
 
-    for(int x=0; x<n/200000;x++){
+    for(int x=0; x<n;x+=200000){
         std::vector<Plaintext> *ptext = new std::vector<Plaintext>(200000);
         for(int i=0; i<200000;i++){
             std::vector<double> dat = {static_cast<double>(rand())/(static_cast<double>(RAND_MAX/1000))};
@@ -54,14 +54,16 @@ int main(int argc, char* argv[]){
 
         delete ptext;
 
-        auto beginning = clk::now();
+        clk::time_point beginning = clk::now();
         for(ctext_typ c: *sum){
             pc.context->EvalAddInPlace(ctext,c);
         }
-        auto end = clk::now();
+        clk::time_point end = clk::now();
+
         std::cout << "sum " << std::endl;
         delete sum;
-        duration += std::chrono::duration_cast<std::chrono::microseconds>(end-beginning).count();
+        std::cout << d.count() << std::endl;
+        duration += d.count();
     }
 
 
