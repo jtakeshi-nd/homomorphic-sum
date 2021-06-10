@@ -39,15 +39,15 @@ int main(int argc, char* argv[]){
     ctext_typ ctext = pc.context->Encrypt(pc.pk,p);
     size_t duration = 0;
 
-    for(int x=0; x<2;x++){
-        std::vector<Plaintext> *ptext = new std::vector<Plaintext>(n/2);
-        for(int i=0; i<n/2;i++){
+    for(int x=0; x<32;x++){
+        std::vector<Plaintext> *ptext = new std::vector<Plaintext>(n/32);
+        for(int i=0; i<n/32;i++){
             std::vector<double> dat = {static_cast<double>(rand())/(static_cast<double>(RAND_MAX/1000))};
             (*ptext)[i] = pc.context->MakeCKKSPackedPlaintext(rawData);
         }
         std::cout << "plaintexts" << std::endl;
-        std::vector<ctext_typ> *sum = new std::vector<ctext_typ>(n/2); 
-        for(int i=0; i<n/2; i++){
+        std::vector<ctext_typ> *sum = new std::vector<ctext_typ>(n/32); 
+        for(int i=0; i<n/32; i++){
             (*sum)[i] = pc.context->Encrypt(pc.pk,(*ptext)[i]);
         }
         std::cout << "ciphertexts" << std::endl;
