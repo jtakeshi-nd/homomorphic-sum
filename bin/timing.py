@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import subprocess
 import csv
 
@@ -29,7 +30,7 @@ def resetCapacity():
     subprocess.run(['make', 'SGX=1', '-f', 'mk_preprocess', 'decrypt.manifest.sgx', 'decrypt.token', 'pal_loader'],stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-file = open("stats.csv")
+file = open("stats.csv",'w' )
 csvWriter = csv.writer(file,csv.get_dialect('excel'))
 
 i = 1000000
