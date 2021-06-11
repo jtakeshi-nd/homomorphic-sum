@@ -35,6 +35,7 @@ csvWriter = csv.writer(file,csv.get_dialect('excel'))
 i = 1000000
 capacityAttempt = 0
 subprocess.run(['./write'])
+
 while i < 10000000:
     j=0
     while j < 10:
