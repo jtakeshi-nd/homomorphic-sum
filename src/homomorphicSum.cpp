@@ -35,7 +35,7 @@ int main(int argc, char* argv[]){
 
     for(int i=1;i<n;i++){
         ctext_typ tmp;
-        Serial::DeserializeFromFile("ctexts/ctx" + std::to_string(i),tmp,SerType::BINARY);
+        Serial::DeserializeFromFile("ctexts/ctx" + std::to_string(i%1000000),tmp,SerType::BINARY);
         auto begin = clk::now();
         pc.context->EvalAddInPlace(ctext,tmp);
         auto end = clk::now();

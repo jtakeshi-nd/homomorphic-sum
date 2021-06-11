@@ -13,7 +13,7 @@ typedef std::chrono::high_resolution_clock clk;
 int main(int argc, char* argvp[]){
 
 
-    PALISADEContainer pc(4096,1,0);
+    PALISADEContainer pc(1024,1,0);
 
     auto d = std::chrono::high_resolution_clock::now().time_since_epoch();
     long unsigned int seed = d.count();
@@ -21,12 +21,12 @@ int main(int argc, char* argvp[]){
 
 
     Plaintext ptx;
-    for(int i=0; i<10000000;i++){
+    for(int i=0; i<1000000;i++){
         std::vector<double> dat = {static_cast<double>(rand())/(static_cast<double>(RAND_MAX/1000))};
         ptx = pc.context->MakeCKKSPackedPlaintext(dat);
     }
     ctext_typ ctx;
-    for(int i=0; i<10000000; i++){
+    for(int i=0; i<1000000; i++){
         ctx = pc.context->Encrypt(pc.pk,ptx);
         Serial::SerializeToFile("ctexts/ctx" + std::to_string(i),ctx,SerType::BINARY);
     }
