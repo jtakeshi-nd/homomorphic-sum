@@ -7,11 +7,17 @@ INCLUDE=include
 BINARY=bin
 
 
-all: homomorphicSum decrypt graphene
+all: initialize homomorphicSum decrypt write graphene
+
+initialize:
+	mkdir -p ctexts container
 
 graphene : homomorphicSum decrypt
-	mkdir -p graphene/container 
+	mkdir -p graphene/container graphene/ctexts
 	cp bin/* graphene/
+
+write : $(SRC)/write.cpp
+	$(CXX) $(CFLAGS) $(PALISADE_INCLUDES) -o $(BINARY)$@ $< $(PALISADE_STATIC_LIBS)
 
 homomorphicSum : $(SRC)/homomorphicSum.cpp
 	$(CXX) $(CFLAGS) $(PALISADE_INCLUDES) -o $(BINARY)/$@ $< $(PALISADE_STATIC_LIBS)
@@ -20,6 +26,6 @@ decrypt : $(SRC)/decrypt.cpp
 	$(CXX) $(CFLAGS) $(PALISADE_INCLUDES) -o $(BINARY)/$@ $< $(PALISADE_STATIC_LIBS)
 
 clean:
-	rm $(BINARY)/decrypt $(BINARY)/homomorphicSum 
-	rm -rf graphene/*
+	rm -f $(BINARY)/decrypt $(BINARY)/homomorphicSum $(BINARY)/write
+	rm -rf graphene container ctexts
 
