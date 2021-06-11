@@ -17,7 +17,7 @@ graphene : homomorphicSum decrypt
 	cp bin/* graphene/
 
 write : $(SRC)/write.cpp
-	$(CXX) $(CFLAGS) $(PALISADE_INCLUDES) -o $(BINARY)$@ $< $(PALISADE_STATIC_LIBS)
+	$(CXX) $(CFLAGS) $(PALISADE_INCLUDES) -o $(BINARY)/$@ $< $(PALISADE_STATIC_LIBS)
 
 homomorphicSum : $(SRC)/homomorphicSum.cpp
 	$(CXX) $(CFLAGS) $(PALISADE_INCLUDES) -o $(BINARY)/$@ $< $(PALISADE_STATIC_LIBS)
