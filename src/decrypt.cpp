@@ -8,7 +8,7 @@ typedef std::chrono::high_resolution_clock clk;
 
 int main(int argc, char* argv[]){
     std::string container("container");
-    std::string ciphertext("ctext.txt");
+    std::string ciphertext("ctext");
     for(int i=1; i < argc; i++){
         if(argv[i][0] == '-')
             switch (argv[i][1]){
