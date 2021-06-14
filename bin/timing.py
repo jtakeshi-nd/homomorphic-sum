@@ -35,25 +35,16 @@ csvWriter = csv.writer(file,csv.get_dialect('excel'))
 
 i = 1000000
 capacityAttempt = 0
-#subprocess.run(['./write'])
+subprocess.run(['./write'])
 
 while i < 10000000:
     j=0
     while j < 10:
         row = [i]
-        result = subprocess.run(['./homomorphicSum',' -n',f' {i}'],stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
+        result = subprocess.run(['./homomorphicSum','-n',f'{i}'],stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
         row+= bytes.decode(result.stdout).strip().split('\n')
-        result = subprocess.run(['graphene-sgx',' decode'], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        result = subprocess.run(['graphene-sgx',' decrypt'], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         row+= bytes.decode(result.stdout).strip().split('\n')
-        '''if result.returncode > 0:
-            increaseCapacity(capacityAttempt)
-            capacityAttempt+=1
-            continue
-        bytes.decode(result.stdout).strip().split('\n')
-        if capacityAttempt >0:
-            csvWriter.writerow(row + [capacities[capacityAttempt-1]])
-        else:
-            csvWriter.writerow(row + ["512M"])'''
         csvWriter.writerow(row)
         j+=1
     i+=1000000
