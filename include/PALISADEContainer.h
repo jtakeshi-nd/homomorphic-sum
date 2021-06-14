@@ -97,7 +97,6 @@ public:
           batchSize,           /*batch size*/
           OPTIMIZED, depth /*depth*/);
 
-
     context->Enable(ENCRYPTION);
     context->Enable(SHE);
     context->Enable(LEVELEDSHE);
