@@ -24,9 +24,7 @@ int main(int argc, char* argvp[]){
     for(int i=0; i<1000000;i++){
         std::vector<double> dat = {static_cast<double>(rand())/(static_cast<double>(RAND_MAX/1000))};
         ptx = pc.context->MakeCKKSPackedPlaintext(dat);
-    }
-    ctext_typ ctx;
-    for(int i=0; i<1000000; i++){
+        ctext_typ ctx;
         ctx = pc.context->Encrypt(pc.pk,ptx);
         Serial::SerializeToFile("ctexts/ctx" + std::to_string(i),ctx,SerType::BINARY);
     }
