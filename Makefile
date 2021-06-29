@@ -3,7 +3,7 @@ PALISADE_STATIC_LIBS=/usr/local/lib/libPALISADEbinfhe_static.a /usr/local/lib/li
 PALISADE_DYNAMIC_LIBS_LOCATION=/usr/local/lib
 PALISADE_DYNAMIC_LIBS= -l PALISADEbinfhe -l PALISADEcore -l PALISADEpke 
 CXX=g++
-CFLAGS= -std=c++14 -O3
+CFLAGS= -std=c++14 -O3 -pthread
 SRC=src
 INCLUDE=include
 BINARY=bin
@@ -14,7 +14,7 @@ all: initialize homomorphicSum decrypt write graphene
 initialize:
 	mkdir -p ctexts container
 
-graphene : homomorphicSum decrypt
+graphene:
 	mkdir -p graphene/container graphene/ctexts
 	cp bin/* graphene/
 
